@@ -1,0 +1,37 @@
+server:
+  port: 7878
+spring:
+  application:
+    name: config-server-7878
+  cloud:
+    consul:
+      port: 8500
+      host: localhost
+      discovery:
+        register-health-check: true
+        service-name: ${spring.application.name}
+    # 配置中心
+    config:
+      server:
+        git:
+          uri: https://gitee.com/apelx/springcloud-config.git
+          # 配置git拉取配置文件保存的本地文件目录 （注意：目录一定是空目录，首次启动时会清空该目录）
+          basedir: D:\codeTempLocation\baizhi-springcloud-config
+          # 搜索的目录（不配置默认拉去uri里的目录）
+          search-paths:
+            - springcloud-config
+          # 默认读取的分支
+          default-label: master
+  rabbitmq:
+    host: apelx.cn
+    port: 5672
+    username: guest
+    password: guest
+
+
+### bus 刷新地址 curl -X POST http://localhost:7878/actuator/bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # bus-refresh

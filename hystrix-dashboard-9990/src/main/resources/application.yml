@@ -1,0 +1,15 @@
+server:
+  port: 9990
+spring:
+  application:
+    name: hystrx-dashboard-9990
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register-health-check: true
+        service-name: ${spring.application.name}
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

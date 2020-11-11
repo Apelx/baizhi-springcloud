@@ -1,0 +1,17 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: consul-client-8889
+  cloud:
+    consul:
+      # 注册consul服务的主机
+      host: localhost
+      # 注册consul服务的端口号
+      port: 8500
+      discovery:
+        # 开启consul服务的健康检查, 默认开启(强烈不建议关闭)
+        register-health-check: true
+        # 指定注册服务的名称，不指定配置默认就是应用名(建议与应用名一致)
+        service-name: ${spring.application.name}

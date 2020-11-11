@@ -1,0 +1,13 @@
+server:
+  port: 9998
+
+spring:
+  application:
+    name: product-micro-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register-health-check: true
+        service-name: ${spring.application.name}

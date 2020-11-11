@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    config:
+      # 开启统一配置中心服务
+      discovery:
+        enabled: true
+        # 指定统一配置中心的唯一标识
+        service-id: config-server-7878
+      # 指定分支名称
+      label: master
+      # 指定配置文件的名称
+      name: config
+      # 指定拉去配置文件的环境
+      profile: dev
+      # 加入bus后报错 "configServerRetryInterceptor"not be found ; 解决方案加入如下配置, 让config快速失败
+      fail-fast: true
+
+# spring cloud config 客户端手动刷新地址为：  curl -X POST http://localhost:7879/actuator/refresh
+# 暴露服务端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

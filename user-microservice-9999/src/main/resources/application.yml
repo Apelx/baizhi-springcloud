@@ -1,0 +1,58 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: user-micro-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register-health-check: true
+        service-name: ${spring.application.name}
+  # 允许同实例bean注入spring
+  main:
+    allow-bean-definition-overriding: true
+
+# 修改ribbon的默认调用负载均衡策略(Ribbon在客户端会缓存注册中心的服务列表，所以修改调用策略，在调用方修改)
+# product-micro-services: 要修改调用指定的微服务名
+# 策略都继承 IRule 接口
+product-micro-service:
+  ribbon:
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
+# feign组件默认调用超时时间为1s;超过1s未返回则会报错 read timeout
+# product-micro-service: 配置调用的微服务名称
+#feign:
+#  client:
+#    config:
+#      product-micro-service:
+#        connectTimeout: 5000
+#        readTimeout: 5000
+
+# default: 设置feign的默认超时时间
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        ### feign的日志级别
+        # 1.NONE: 不记录任何日志
+        # 2.BASIC 仅仅记录请求方法,url,响应状态码及执行时间
+        # 3.HEADERS 在Basic级别基础之上，记录请求和响应的header
+        # 4.FULL 记录请求和响应的header、body元数据
+        #      product-micro-service:
+        loggerLevel: full
+  # feign开始hystrix支持
+  hystrix:
+    enabled: true
+
+logging:
+  level:
+    cn:
+      apelx:
+        user:
+          feignclient: debug

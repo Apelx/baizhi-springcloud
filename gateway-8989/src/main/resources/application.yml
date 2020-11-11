@@ -1,0 +1,48 @@
+server:
+  port: 8989
+spring:
+  application:
+    name: getway-8989
+  cloud:
+    consul:
+      port: 8500
+      host: localhost
+      discovery:
+        service-name: ${spring.application.name}
+        register-health-check: true
+    gateway:
+      # 开启从注册中心发现服务
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # 指定路由唯一标识
+        - id: user_route
+          # 指定路由服务的地址
+#          uri: http://localhost:9999/
+          uri: lb://user-micro-service
+          # 指定断言(路由规则)
+          predicates:
+            - Path=/user/**
+        - id: product_route
+#          uri: http://localhost:9998/
+          uri: lb://product-micro-service
+          predicates:
+            - Path=/product/**
+          filters:
+            - AddRequestParameter=productId, 32
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+        add-to-simple-url-handler-mapping: true
+
+
+# 开启所有web端点暴露 访问路径：
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
