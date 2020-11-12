@@ -20,6 +20,7 @@
         <module>gateway-8989</module>
         <module>config-server-7878</module>
         <module>config-client-7879</module>
+        <module>nacos-client-8789</module>
     </modules>
 
     <parent>
@@ -32,6 +33,7 @@
     <properties>
         <springcloud.verison>Hoxton.SR8</springcloud.verison>
         <springboot.version>2.2.10.RELEASE</springboot.version>
+        <spring.cloud.alibaba.version>2.2.3.RELEASE</spring.cloud.alibaba.version>
         <hutool.version>5.3.7</hutool.version>
     </properties>
     <dependencies>
@@ -54,6 +56,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
