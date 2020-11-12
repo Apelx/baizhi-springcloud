@@ -21,6 +21,7 @@
         <module>config-server-7878</module>
         <module>config-client-7879</module>
         <module>nacos-client-8789</module>
+        <module>sentinel-9000</module>
     </modules>
 
     <parent>
@@ -35,12 +36,18 @@
         <springboot.version>2.2.10.RELEASE</springboot.version>
         <spring.cloud.alibaba.version>2.2.3.RELEASE</spring.cloud.alibaba.version>
         <hutool.version>5.3.7</hutool.version>
+        <lombok.version>1.18.12</lombok.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
     <dependencyManagement>

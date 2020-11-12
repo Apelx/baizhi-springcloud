@@ -11,12 +11,12 @@ spring:
         # 指定配置中心的地址
         server-addr: ${spring.cloud.nacos.server-addr}
         # 指定namespace
-        namespace: 028f5307-771e-4f6f-af58-21921435fdfa
+        namespace: 3dc2e9fb-8fd9-47d8-b1ea-1456cd375e2f
         # 指定配置组
-        group: baizhi-springcloud
+        group: BAIZHI_SPRINGCLOUD
         # 指定拉取文件的后缀
         file-extension: yaml
   # 激活dev配置
   profiles:
-    active: dev
+    active: prod
 
