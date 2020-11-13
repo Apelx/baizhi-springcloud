@@ -11,7 +11,7 @@ spring:
         # 指定配置中心的地址
         server-addr: ${spring.cloud.nacos.server-addr}
         # 指定namespace
-        namespace: 3dc2e9fb-8fd9-47d8-b1ea-1456cd375e2f
+        namespace: a39d9d5e-f85f-4690-bedd-e5dcb727e389
         # 指定配置组
         group: BAIZHI_SPRINGCLOUD
         # 指定拉取文件的后缀

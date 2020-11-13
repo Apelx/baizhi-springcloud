@@ -19,3 +19,24 @@ spring:
         port: 8719
       log:
         dir: F:\SOFT\Sentinel\log
+      # 将sentinel配置持久化至nacos配置
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            data-id: ${spring.application.name}
+            namespace: eb3d1486-728b-453a-9ee4-9447dc258cbb
+            group-id: SENTINEL
+            data-type: json
+            rule-type: flow
+
+# 开启feign支持sentinel
+feign:
+  sentinel:
+    enabled: true
+# 暴露所有端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

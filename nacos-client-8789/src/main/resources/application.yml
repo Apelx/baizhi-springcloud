@@ -1,9 +1,5 @@
+# nacos中配置如下：
 #server:
 #  port: 8789
-#spring:
-#  application:
-#    name: nacos-client-8789
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: localhost:8848
+#customer:
+#  text: apelx
