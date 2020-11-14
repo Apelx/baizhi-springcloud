@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 /**
  * SentinelController
  *
@@ -31,12 +33,40 @@ public class SentinelController {
 
     @GetMapping(value = "/sentinel/hotKey")
     @SentinelResource(value = "/sentinel/hotKey", blockHandler = "blockHandlerForSentinelKey", blockHandlerClass = {ExceptionUtils.class},
-    fallback = "fallbackHandlerForSentinelKey", fallbackClass = {ExceptionUtils.class})
+            fallback = "fallbackHandlerForSentinelKey", fallbackClass = {ExceptionUtils.class})
     public String sentinelKey(@RequestParam(value = "key1", required = false) String key1,
                               @RequestParam(value = "key2", required = false) String key2) {
-        int age = 10 /  0;
+        int age = 10 / 0;
         return "进入sentinel热点key方法,key1: " + key1 + ", key2: " + key2;
     }
 
+    /**
+     * 测试平均响应时长熔断
+     *
+     * @return string
+     */
+    @GetMapping(value = "/sentinel/rt")
+    public String sentinelRt() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        log.info("进入rt方法");
+        return "进入rt测试方法";
+    }
+
+    /**
+     * 测试异常比例熔断
+     *
+     * @return string
+     */
+    @GetMapping(value = "/sentinel/ep")
+    public String sentinelExceptionProportion(@RequestParam(value = "id", required = false) Integer id) {
+        if (Objects.nonNull(id) && id < 0) {
+            throw new RuntimeException("invalid arg execption");
+        }
+        return "进入 ep 测试方法";
+    }
 
 }
